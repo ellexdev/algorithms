@@ -9,6 +9,11 @@ public class Fibonacci {
         System.out.println(fibSlow(3));
         System.out.println(fibSlow(5));
         System.out.println(fibSlow(10));
+
+        int n = 100;
+        long[] mem = new long[n + 1];
+        System.out.println(fibFastRecursion(n, mem));
+
         System.out.println(fibFast(10));
         System.out.println(fibFast(100));
     }
@@ -18,6 +23,19 @@ public class Fibonacci {
             return n;
         }
         return fibSlow(n - 1) + fibSlow(n - 2);
+    }
+
+    private static long fibFastRecursion(int n, long[] mem) {
+        if (n <= 1) {
+            return n;
+        } else if (mem[n] != 0) {
+            return mem[n];
+        }
+
+        long res = fibFastRecursion(n - 1, mem) + fibFastRecursion(n - 2, mem);
+        mem[n] = res;
+
+        return res;
     }
 
     private static long fibFast(int n) {
